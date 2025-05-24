@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Examination_System.Question
 {
-	internal class TrueOrFalseQuestion : MyQuestion
+	public class TrueOrFalseQuestion : MyQuestion
 	{
 		public TrueOrFalseQuestion(int _id, string _body, AnswerList _answerList, string[] _correctAnswerId) : base("True Or False", _id, _body, _answerList,_correctAnswerId)
 		{

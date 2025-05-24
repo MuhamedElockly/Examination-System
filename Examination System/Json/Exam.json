@@ -34,7 +34,7 @@
         {
           "header": "choose one",
           "body": "What is abstraction?",
-          "id": 1,
+          "id": 2,
           "answers": [
             {
               "id": "A",
@@ -57,7 +57,7 @@
         {
           "header": "choose one",
           "body": "What is abstraction?",
-          "id": 2,
+          "id": 3,
           "answers": [
             {
               "id": "A",
@@ -84,7 +84,7 @@
         {
           "header": "choose all",
           "body": "What is abstraction?",
-          "id": 3,
+          "id": 4,
           "answers": [
             {
               "id": "A",
@@ -112,7 +112,196 @@
         {
           "header": "choose one",
           "body": "What is abstraction?",
-          "id": 4,
+          "id": 5,
+          "answers": [
+            {
+              "id": "A",
+              "body": "hide complex implementation"
+            },
+            {
+              "id": "B",
+              "body": "enable code reusablity"
+            },
+            {
+              "id": "C",
+              "body": "bundl code into dingle unit"
+            },
+            {
+              "id": "D",
+              "body": "make code use for more than function"
+            }
+
+          ],
+          "correct answer": [
+            "A"
+          ]
+        },
+        {
+          "header": "choose one",
+          "body": "What is abstraction?",
+          "id": 6,
+          "answers": [
+            {
+              "id": "A",
+              "body": "hide complex implementation"
+            },
+            {
+              "id": "B",
+              "body": "enable code reusablity"
+            },
+            {
+              "id": "C",
+              "body": "bundl code into dingle unit"
+            },
+            {
+              "id": "D",
+              "body": "make code use for more than function"
+            }
+
+          ],
+          "correct answer": [
+            "A"
+          ]
+        },
+        {
+          "header": "choose one",
+          "body": "What is abstraction?",
+          "id": 7,
+          "answers": [
+            {
+              "id": "A",
+              "body": "hide complex implementation"
+            },
+            {
+              "id": "B",
+              "body": "enable code reusablity"
+            },
+            {
+              "id": "C",
+              "body": "bundl code into dingle unit"
+            },
+            {
+              "id": "D",
+              "body": "make code use for more than function"
+            }
+
+          ],
+          "correct answer": [
+            "A"
+          ]
+        },
+        {
+          "header": "choose one",
+          "body": "What is abstraction?",
+          "id": 8,
+          "answers": [
+            {
+              "id": "A",
+              "body": "hide complex implementation"
+            },
+            {
+              "id": "B",
+              "body": "enable code reusablity"
+            },
+            {
+              "id": "C",
+              "body": "bundl code into dingle unit"
+            },
+            {
+              "id": "D",
+              "body": "make code use for more than function"
+            }
+
+          ],
+          "correct answer": [
+            "A"
+          ]
+        },
+        {
+          "header": "choose one",
+          "body": "What is abstraction?",
+          "id": 9,
+          "answers": [
+            {
+              "id": "A",
+              "body": "hide complex implementation"
+            },
+            {
+              "id": "B",
+              "body": "enable code reusablity"
+            },
+            {
+              "id": "C",
+              "body": "bundl code into dingle unit"
+            },
+            {
+              "id": "D",
+              "body": "make code use for more than function"
+            }
+
+          ],
+          "correct answer": [
+            "A"
+          ]
+        },
+        {
+          "header": "choose one",
+          "body": "What is abstraction?",
+          "id": 10,
+          "answers": [
+            {
+              "id": "A",
+              "body": "hide complex implementation"
+            },
+            {
+              "id": "B",
+              "body": "enable code reusablity"
+            },
+            {
+              "id": "C",
+              "body": "bundl code into dingle unit"
+            },
+            {
+              "id": "D",
+              "body": "make code use for more than function"
+            }
+
+          ],
+          "correct answer": [
+            "A"
+          ]
+        },
+        {
+          "header": "choose one",
+          "body": "What is abstraction?",
+          "id": 11,
+          "answers": [
+            {
+              "id": "A",
+              "body": "hide complex implementation"
+            },
+            {
+              "id": "B",
+              "body": "enable code reusablity"
+            },
+            {
+              "id": "C",
+              "body": "bundl code into dingle unit"
+            },
+            {
+              "id": "D",
+              "body": "make code use for more than function"
+            }
+
+          ],
+          "correct answer": [
+            "A"
+          ]
+        },
+        {
+          "header": "choose one",
+          "body": "What is abstraction?",
+          "id": 12,
           "answers": [
             {
               "id": "A",

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Examination_System.Question
 {
-	internal interface ICorrect
+	public interface ICorrect
 	{
 		public bool IsAnswerCorrect(string[] answer);
 	}

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Examination_System.Exam
 {
-	internal abstract class MyExam
+	public abstract class MyExam
 	{
 		public MyExam(int _totalQuestions, int _examinationTime, HashSet<MyQuestion> _questions)
 		{

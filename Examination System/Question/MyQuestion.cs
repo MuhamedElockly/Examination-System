@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Examination_System.Question
 {
-	internal abstract class MyQuestion : ICorrect
+	public abstract class MyQuestion : ICorrect
 	{
-		protected MyQuestion(string _header, int _id, string _body, AnswerList _answerList, string[] _correctAnswer)
+		public MyQuestion(string _header, int _id, string _body, AnswerList _answerList, string[] _correctAnswer)
 		{
 			Id = _id;
 			Body = _body;

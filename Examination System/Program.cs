@@ -11,8 +11,8 @@ namespace Examination_System
 		static void Main(string[] args)
 		{			
 			JsonHandler handler = new JsonHandler();
-			MyExam myExam= handler.CreateExam();
-			myExam.DisplayExam();
+		//	MyExam myExam= handler.CreateExam();
+			//myExam.DisplayExam();
 		}
 
 	}

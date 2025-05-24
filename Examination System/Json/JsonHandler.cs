@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Examination_System.Json
 {
-	internal class JsonHandler
+	public class JsonHandler
 	{
-		public MyExam CreateExam()
+		public static MyExam CreateExam()
 		{
 			MyExam? myExam = null;
 			try

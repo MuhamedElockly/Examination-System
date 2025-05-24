@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Examination_System.Question
 {
-	internal class QuestionSet : HashSet<MyQuestion>
+	public class QuestionSet : HashSet<MyQuestion>
 	{
 		public void Add(MyQuestion question)
 		{

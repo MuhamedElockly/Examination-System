@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="flag-black.png" />
+    <None Remove="flag-orange.png" />
+    <None Remove="flag.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Examination System\Examination System.csproj">
+      <Private>true</Private>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="flag-black.png" />
+    <Resource Include="flag-orange.png" />
+    <Resource Include="flag.png" />
+  </ItemGroup>
+
+</Project>

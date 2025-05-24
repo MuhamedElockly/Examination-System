@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Examination_System.Answer
 {
-	internal class MyAnswer
+	public class MyAnswer
 	{
 		public MyAnswer(string _answerId, string _answerBody)
 		{

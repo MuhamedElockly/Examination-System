@@ -15,6 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="QuestionViewModel.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Examination System\Examination System.csproj">
       <Private>true</Private>
     </ProjectReference>

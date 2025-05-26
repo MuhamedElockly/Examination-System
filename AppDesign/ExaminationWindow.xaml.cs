@@ -1,9 +1,11 @@
+using AppDesign;
 using Examination_System.Answer;
 using Examination_System.Exam;
 using Examination_System.Json;
 using Examination_System.Question;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,20 +19,26 @@ namespace ExaminationSystem
 	{
 		private int currentQuestionIndex = 0;
 		private TimeSpan remainingTime = TimeSpan.FromMinutes(60);
-		MyExam myExam;
+		private MyExam myExam;
 		private Border _lastSelectedBorder;
-		List<int> FlagedIndexs;
-		ContentControl containerCopy = null;
+		private List<int> FlagedIndexs;
+		private ContentControl containerCopy = null;
+		private ObservableCollection<QuestionWrapper> _wrappedQuestions;
+
+
 		public ExaminationWindow()
 		{
 			InitializeComponent();
 			InitializeTimer();
 			myExam = JsonHandler.CreateExam();
-			ItemControlList.ItemsSource = myExam.Questions;
-			//NavListBox.ItemsSource = myExam.Questions;	
-			NavListView.ItemsSource = myExam.Questions;
-			FlagedIndexs = new List<int>();
 
+			_wrappedQuestions = new ObservableCollection<QuestionWrapper>(
+				myExam.Questions.Select(q => new QuestionWrapper(q))
+			);
+
+			ItemControlList.ItemsSource = _wrappedQuestions;
+			NavListView.ItemsSource = _wrappedQuestions;
+			FlagedIndexs = new List<int>();
 		}
 
 		private void InitializeTimer()
@@ -77,7 +85,7 @@ namespace ExaminationSystem
 				var border = FindVisualChild<Border>(container);
 
 				container.BringIntoView();
-				ChangeQuestionStyle(index);
+				//ChangeQuestionStyle(index);
 
 			}
 		}
@@ -99,9 +107,15 @@ namespace ExaminationSystem
 
 		private void NavItemClicked(object sender, RoutedEventArgs e)
 		{
-			if (sender is Border border && border.DataContext is MyQuestion question)
+			//MessageBox.Show("nav clicke");
+			if (sender is Border border && border.DataContext is QuestionWrapper questionWrapper)
 			{
-				ScrollToQuestion(question.Id - 1);
+				_wrappedQuestions[currentQuestionIndex].IsFoucsed = false;
+				currentQuestionIndex = questionWrapper.Question.Id - 1;
+				_wrappedQuestions[currentQuestionIndex].IsFoucsed = true;
+				SelectNavQuestion(questionWrapper.Question.Id - 1);
+
+				ScrollToQuestion(questionWrapper.Question.Id - 1);
 			}
 		}
 		private void ChangeQuestionStyle(int index)
@@ -130,13 +144,13 @@ namespace ExaminationSystem
 			{
 				var border = FindVisualChild<Border>(container);
 
-				containerCopy = new ContentControl
-				{
-					ContentTemplate = ItemControlList.ItemTemplate,
-					Content = container?.DataContext,
-					BorderBrush = border.BorderBrush,
-					BorderThickness = border.BorderThickness,
-				};
+				//containerCopy = new ContentControl
+				//{
+				//	ContentTemplate = ItemControlList.ItemTemplate,
+				//	Content = container?.DataContext,
+				//	BorderBrush = border.BorderBrush,
+				//	BorderThickness = border.BorderThickness,
+				//};
 				//var bordertest = FindVisualChild<Border>(containerCopy);
 				//MessageBox.Show(containerCopy.BorderBrush.ToString());
 				//// Find the Border in the container's visual tree
@@ -156,10 +170,13 @@ namespace ExaminationSystem
 		private void QuestionContainer_MouseDown(object sender, MouseButtonEventArgs e)
 		{
 
-			if (sender is Border border2 && border2.DataContext is MyQuestion question)
+			if (sender is Border border2 && border2.DataContext is QuestionWrapper questionWrapper)
 			{
-				ChangeQuestionStyle(question.Id - 1);
-				SelectNavQuestion(question.Id - 1);
+				_wrappedQuestions[currentQuestionIndex].IsFoucsed = false;
+				currentQuestionIndex = questionWrapper.Question.Id-1;
+				_wrappedQuestions[currentQuestionIndex].IsFoucsed = true;
+				SelectNavQuestion(questionWrapper.Question.Id - 1);
+
 			}
 		}
 		private void Timer_Tick(object sender, EventArgs e)
@@ -217,49 +234,16 @@ namespace ExaminationSystem
 
 		private void Grid_Loaded(object sender, RoutedEventArgs e)
 		{
-			ScrollToQuestion(0);
+			_wrappedQuestions[currentQuestionIndex].IsFoucsed = true;						
 			SelectNavQuestion(0);
+			ScrollToQuestion(0);		
 		}
 
 		private void FlagImage_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			Image flagImage = sender as Image;
-
-			if (flagImage.DataContext is MyQuestion question)
+			if (sender is Image flagImage && flagImage.DataContext is QuestionWrapper wrapper)
 			{
-				//	MessageBox.Show($"Question ID: {question.Id}", "Marked Question");
-				var container = ItemControlList.ItemContainerGenerator.ContainerFromIndex(question.Id - 1) as FrameworkElement;
-				if (FlagedIndexs.Contains(question.Id - 1))
-				{
-					flagImage.Source = new BitmapImage(
-						new Uri("./flag-black.png", UriKind.Relative));
-					FlagedIndexs.Remove(question.Id - 1);
-					if (container != null)
-					{
-						var border = FindVisualChild<Border>(container);
-						if (border != null)
-						{
-							border.BorderBrush = Brushes.Black;
-							border.BorderThickness = new Thickness(3);
-						}
-					}
-				}
-				else
-				{
-					flagImage.Source = new BitmapImage(
-						new Uri("./flag-orange.png", UriKind.Relative));
-					FlagedIndexs.Add(question.Id - 1);
-					if (container != null)
-					{
-						var border = FindVisualChild<Border>(container);
-						if (border != null)
-						{
-							border.BorderBrush = Brushes.Orange;
-							border.BorderThickness = new Thickness(3);
-						}
-					}
-				}
-				//	flagImage.Opacity = 1.0;
+				wrapper.IsFlaged = !wrapper.IsFlaged;
 			}
 		}
 	}

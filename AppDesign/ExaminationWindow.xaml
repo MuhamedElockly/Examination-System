@@ -8,11 +8,9 @@
 
     <Window.Resources>
         <Style x:Key="NavListStyle" TargetType="Border">
-
             <Setter Property="CornerRadius" Value="0,15,15,0"/>
             <Setter Property="Padding" Value="10"/>
             <Setter Property="Background" Value="LightGray"/>
-
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsFoucsed}" Value="True">
                     <Setter Property="Background" Value="#2196F3"/>
@@ -21,7 +19,7 @@
                     <Setter Property="Background" Value="Orange"/>
                 </DataTrigger>
             </Style.Triggers>
-          
+
         </Style>
         <Style x:Key="FlagImageStyle" TargetType="Image">
             <Setter Property="Width" Value="32" />
@@ -42,6 +40,96 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="ShowAnswerButtonStyle" TargetType="Button">
+            <!-- Base Properties -->
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Setter Property="Content" Value="Show Answer"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+
+            <!-- Modern Visual Style -->
+            <Setter Property="Background" Value="#27AE60"/>
+            <Setter Property="BorderBrush" Value="#1E8449"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="6"
+                        SnapsToDevicePixels="True">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="8" 
+                                          ShadowDepth="2" 
+                                          Opacity="0.2" 
+                                          Color="Black"/>
+                            </Border.Effect>
+                            <ContentPresenter x:Name="contentPresenter"
+                                    Content="{TemplateBinding Content}"
+                                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- MouseOver Effect -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#2ECC71"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#27AE60"/>
+                                <Setter TargetName="border" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" 
+                                                  ShadowDepth="3" 
+                                                  Opacity="0.3" 
+                                                  Color="Black"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+
+                            <!-- Pressed Effect -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#229955"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#1A7A42"/>
+                                <Setter TargetName="border" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="5" 
+                                                  ShadowDepth="1" 
+                                                  Opacity="0.2" 
+                                                  Color="Black"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="contentPresenter" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <TranslateTransform Y="1"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <!-- Your Original Triggers -->
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding DataContext.ExamType, 
+                             RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+                     Value="Practical">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsAnswering}" Value="True">
+                    <Setter Property="Content" Value="Hide Answer"/>
+                    <!-- Optional: Change color when showing answer -->
+                    <Setter Property="Background" Value="#3498db"/>
+                    <Setter Property="BorderBrush" Value="#2980b9"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="QuestionHeaderStyle" TargetType="Border">
             <Setter Property="Background" Value="Gray"  />
             <Setter Property="CornerRadius" Value="5"  />
@@ -56,6 +144,88 @@
 
             </Style.Triggers>
 
+        </Style>
+
+        <Style x:Key="QuestionCorrectAnswer" TargetType="ContentControl">
+            <!-- Base Properties -->
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContentControl">
+                        <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="6"
+                        Padding="12,8">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="8" 
+                                        ShadowDepth="2" 
+                                        Opacity="0.15" 
+                                        Color="#27AE60"/>
+                            </Border.Effect>
+                            <ContentPresenter x:Name="contentPresenter"
+                                    Content="{TemplateBinding Content}"
+                                              
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#A5D6A7"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Background" Value="#F8F9FA"/>
+            <Setter Property="BorderBrush" Value="#A5D6A7"/>
+            <Setter Property="BorderThickness" Value="2"/>
+
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullAnswerText}"
+                               
+                        
+                          Foreground="#2E7D32"
+                          Background="Red"
+                          TextAlignment="Center"
+                          Padding="5"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <!-- Triggers -->
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsAnswering}" Value="True">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Setter Property="Background" Value="#EBF5FB"/>
+                    <Setter Property="BorderBrush" Value="#D4E6F1"/>
+                    <Setter  Property="FontSize" Value="240" />
+                    <Setter Property="Foreground" Value="#2E7D32"/>
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                       From="0" To="1" Duration="0:0:0.3"/>
+                                <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                          From="10,0" To="10,10" Duration="0:0:0.3"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                       From="1" To="0" Duration="0:0:0.2"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
         <Style x:Key="QuestionBorderStyle" TargetType="Border">
             <Setter Property="BorderBrush" Value="Gray"/>
@@ -83,9 +253,14 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0"  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".3*"/>
+                        <ColumnDefinition Width=".7*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -141,18 +316,25 @@
                     <TextBlock Grid.Row="1" FontSize="20" FontWeight="Bold"
                              Margin="0,20,0,20"
                              Text="{Binding Question.Body}"/>
-                    <ItemsControl Grid.Row="2" ItemsSource="{Binding Question.MyAnswerList}">
+                    <ItemsControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding WrappedAnswers}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <RadioButton Content="{Binding AnswerBody}" 
+                                <RadioButton Content="{Binding FullAnswerText}" 
                                           Margin="5,5"
-                                          GroupName="QuestionAnswers"
-                                          IsChecked="{Binding IsSelected}"
+                                          GroupName="{Binding DataContext.Question.Id,RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                          IsChecked="{Binding IsSelected,Mode=TwoWay}"
                                              Checked="RadioButton_Checked"
+                                                                   Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+
                                              />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
+                    <Button   Grid.Column="0" Grid.Row="3" Style="{StaticResource ShowAnswerButtonStyle}"  Click="ShowCorrectAnswer">
+                    </Button>
+                    <ContentControl  Grid.Column="1" Grid.Row="3" Style="{StaticResource QuestionCorrectAnswer}">
+                        <TextBlock FontSize="22" Text="{Binding CorrectAnswer}"/>
+                    </ContentControl>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -167,10 +349,14 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-
-                    <Grid Grid.Row="0"  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".3*"/>
+                        <ColumnDefinition Width=".7*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" >
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -231,19 +417,27 @@
                     <TextBlock Grid.Row="1" FontSize="20" FontWeight="Bold"
                Margin="0,20,0,20"
                Text="{Binding Question.Body}"/>
-                    <ItemsControl Grid.Row="2" ItemsSource="{Binding Question.MyAnswerList}">
+                    <ItemsControl Grid.Row="2" ItemsSource="{Binding WrappedAnswers}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <CheckBox Content="{Binding AnswerBody}" 
+                                <CheckBox Content="{Binding FullAnswerText}" 
                             Margin="5,5"
                           
-                            IsChecked="{Binding IsSelected}"
-                               Checked="RadioButton_Checked"
+                            IsChecked="{Binding IsSelected,Mode=TwoWay}"
+                                          
+                               Checked="CheckBoxButton_Checked"
+                                          Unchecked="CheckBoxButton_Checked"
+                                          Tag="{Binding DataContext,RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                    <!--</StackPanel>-->
+                    <Button   Grid.Column="0" Grid.Row="3" Style="{StaticResource ShowAnswerButtonStyle}" Click="ShowCorrectAnswer"  >
+                    </Button>
+                    <ContentControl Grid.Column="1" Grid.Row="3" Style="{StaticResource QuestionCorrectAnswer}">
+                        <TextBlock FontSize="22" Text="{Binding CorrectAnswer}"/>
+                    </ContentControl>
+
                 </Grid>
             </Border>
         </DataTemplate>
@@ -253,7 +447,7 @@
                                    ChooseAllTemplate="{StaticResource ChooseAllTemplate}" />
     </Window.Resources>
 
-    <Grid Loaded="Grid_Loaded">
+    <Grid Loaded="Grid_Loaded" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -273,20 +467,20 @@
                  FontWeight="Bold" />
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0" >
                     <TextBlock FontSize="24" FontWeight="Bold" Foreground="White" Text="Time Remaining :" VerticalAlignment="Center"/>
-                    <Label FontSize="24" FontWeight="Bold" Foreground="White" Content="60:00" HorizontalAlignment="Right"/>
+                    <Label FontSize="24" FontWeight="Bold" Foreground="White" Content="{Binding ExamTime}" HorizontalAlignment="Right"/>
                 </StackPanel>
             </StackPanel>
         </Border>
 
         <ScrollViewer Grid.Row="1" Grid.Column="1">
-            <Border BorderThickness="2" Padding="20" Background="Bisque">
-                <ItemsControl Name="ItemControlList"
+            <Border BorderThickness="2" Padding="20" Background="#F7F9FC">
+                <ItemsControl Name="ItemControlList" ItemsSource="{Binding WrappedQuestions}"
                             ItemTemplateSelector="{StaticResource QuestionTemplateSelector}">
                 </ItemsControl>
             </Border>
         </ScrollViewer>
         <ScrollViewer Grid.Row="1" Grid.Column="0">
-            <ListView Name="NavListView">
+            <ListView Name="NavListView" ItemsSource="{Binding WrappedQuestions}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="Template">
@@ -375,7 +569,7 @@
                         Padding="30,10" 
                         Background="#4CAF50" 
                         Foreground="White" 
-                        FontWeight="Bold"/>
+                        FontWeight="Bold" Click="SubmitExam"/>
             </StackPanel>
         </Border>
     </Grid>

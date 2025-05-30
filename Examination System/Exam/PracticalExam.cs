@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Examination_System.Exam
 {
-	internal class PracticalExam : MyExam
+	public class PracticalExam : MyExam
 	{
 		public PracticalExam(int _totalQuestions, int _examinationTime, HashSet<MyQuestion> _questions) : base(_totalQuestions, _examinationTime, _questions)
 		{
@@ -25,7 +25,7 @@ namespace Examination_System.Exam
 				DispalyCorrectAnswer(question);
 
 			}
-			DisplayStudentScore();
+			//DisplayStudentScore();
 		}
 		public void DispalyCorrectAnswer(MyQuestion question)
 		{

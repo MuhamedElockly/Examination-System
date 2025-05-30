@@ -1,8 +1,8 @@
 {
   "exam": [
     { 
-      "type": "final",
-      "time": 20,
+      "type": "practical",
+      "time": 28,
       "questions": [
         {
           "header": "choose one",

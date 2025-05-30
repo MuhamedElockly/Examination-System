@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Examination_System.Exam
 {
-	internal class FinalExam : MyExam
+	public class FinalExam : MyExam
 	{
 		public FinalExam(int _totalQuestions, int _examinationTime, HashSet<MyQuestion> _questions) : base(_totalQuestions, _examinationTime, _questions)
 		{
@@ -22,7 +22,7 @@ namespace Examination_System.Exam
 				string[] questionAnswer = GetStudentInput(question.MyAnswerList);
 				QuestionsAnswer.Add(question, questionAnswer);
 			}
-			DisplayStudentScore();
+			//DisplayStudentScore();
 		}
 	}
 }

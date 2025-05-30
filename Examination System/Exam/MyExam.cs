@@ -20,7 +20,7 @@ namespace Examination_System.Exam
 		public int TotalQuestions { get; set; }
 		public int ExaminationTime { get; set; }
 		public HashSet<MyQuestion> Questions { get; set; }
-		protected Dictionary<MyQuestion, string[]> QuestionsAnswer { get; set; }
+		public Dictionary<MyQuestion, string[]> QuestionsAnswer { get; set; }
 		protected bool IsStudentInputValid(string[] input, List<MyAnswer> answers)
 		{
 
@@ -119,8 +119,9 @@ namespace Examination_System.Exam
 			string filePath = Path.Combine(fullPath, "student.txt");
 			File.WriteAllText(filePath, "");
 		}
-		public void DisplayStudentScore()
+		public double CorrectExam()
 		{
+			StudentScore = 0;
 			ClearStudentFile();
 			foreach (KeyValuePair<MyQuestion, string[]> valuePair in QuestionsAnswer)
 			{
@@ -131,11 +132,12 @@ namespace Examination_System.Exam
 				ExportStudentAnswer(valuePair);
 			}
 			ExportStudentTotalScore((StudentScore / Questions.Count) * 100);
-			Console.BackgroundColor = ConsoleColor.White;
-			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine($"  Student Score is : {(StudentScore / Questions.Count) * 100}%  ");
-			Console.BackgroundColor = ConsoleColor.Black;
-			Console.ForegroundColor = ConsoleColor.White;
+			//Console.BackgroundColor = ConsoleColor.White;
+			//Console.ForegroundColor = ConsoleColor.Green;
+			//Console.WriteLine($"  Student Score is : {(StudentScore / Questions.Count) * 100}%  ");
+			//Console.BackgroundColor = ConsoleColor.Black;
+			//Console.ForegroundColor = ConsoleColor.White;
+			return (StudentScore / Questions.Count) * 100;
 		}
 
 	}

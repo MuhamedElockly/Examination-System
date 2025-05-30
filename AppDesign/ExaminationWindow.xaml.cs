@@ -25,19 +25,21 @@ namespace ExaminationSystem
 		private ContentControl containerCopy = null;
 		private ObservableCollection<QuestionWrapper> _wrappedQuestions;
 
-
+		private ExamViewModel _examViewModel;
 		public ExaminationWindow()
 		{
 			InitializeComponent();
 			InitializeTimer();
 			myExam = JsonHandler.CreateExam();
+			_examViewModel = new ExamViewModel(myExam);
 
-			_wrappedQuestions = new ObservableCollection<QuestionWrapper>(
-				myExam.Questions.Select(q => new QuestionWrapper(q))
-			);
+			//_wrappedQuestions = new ObservableCollection<QuestionWrapper>(
+			//	myExam.Questions.Select(q => new QuestionWrapper(q))
+			//);
 
-			ItemControlList.ItemsSource = _wrappedQuestions;
-			NavListView.ItemsSource = _wrappedQuestions;
+			this.DataContext = _examViewModel;
+			//ItemControlList.ItemsSource = _wrappedQuestions;
+			//NavListView.ItemsSource = _wrappedQuestions;
 			FlagedIndexs = new List<int>();
 		}
 
@@ -52,13 +54,43 @@ namespace ExaminationSystem
 		{
 			if (sender is RadioButton radioButton && radioButton.IsChecked == true)
 			{
-				// Get the bound answer
+				QuestionWrapper questionWrapper = (QuestionWrapper)radioButton.Tag;
+				string[] res = questionWrapper.GetSelectedAnswers();
+				//MyAnswer answer = (MyAnswer)radioButton.DataContext;
+				//MyQuestion question = (MyQuestion)radioButton.Tag;
+				//MessageBox.Show($"You selected: {question.CorrectAnswerId} ",
+				//			  "Selection Made",
+				//			  MessageBoxButton.OK,
+				//			  MessageBoxImage.Information);
 
-				MessageBox.Show($"You selected: ",
-							  "Selection Made",
-							  MessageBoxButton.OK,
-							  MessageBoxImage.Information);
+				bool addedSuccessfuly = myExam.QuestionsAnswer.TryAdd(questionWrapper.Question, res);
+				if (!addedSuccessfuly)
+				{
+					myExam.QuestionsAnswer[questionWrapper.Question] = res;
+				}
+				//MessageBox.Show($"You added: {myExam.QuestionsAnswer[questionWrapper.Question][0]} ",
+				//			  "Selection Made",
+				//			  MessageBoxButton.OK,
+				//			  MessageBoxImage.Information);
 
+			}
+		}
+		private void CheckBoxButton_Checked(object sender, RoutedEventArgs e)
+		{
+			if (sender is CheckBox checkBox)
+			{
+				QuestionWrapper questionWrapper = (QuestionWrapper)checkBox.Tag;
+				string[] res = questionWrapper.GetSelectedAnswers();
+				bool addedSuccessfuly = myExam.QuestionsAnswer.TryAdd(questionWrapper.Question, res);
+				if (!addedSuccessfuly)
+				{
+					myExam.QuestionsAnswer[questionWrapper.Question] = res;
+				}
+
+				//MessageBox.Show($"You added: {questionWrapper.GetSelectedAnswers().Length} ",
+				//			  "Selection Made",
+				//			  MessageBoxButton.OK,
+				//			  MessageBoxImage.Information);
 			}
 		}
 		private void SelectNavQuestion(int index)
@@ -110,9 +142,9 @@ namespace ExaminationSystem
 			//MessageBox.Show("nav clicke");
 			if (sender is Border border && border.DataContext is QuestionWrapper questionWrapper)
 			{
-				_wrappedQuestions[currentQuestionIndex].IsFoucsed = false;
+				_examViewModel.WrappedQuestions[currentQuestionIndex].IsFoucsed = false;
 				currentQuestionIndex = questionWrapper.Question.Id - 1;
-				_wrappedQuestions[currentQuestionIndex].IsFoucsed = true;
+				_examViewModel.WrappedQuestions[currentQuestionIndex].IsFoucsed = true;
 				SelectNavQuestion(questionWrapper.Question.Id - 1);
 
 				ScrollToQuestion(questionWrapper.Question.Id - 1);
@@ -172,9 +204,9 @@ namespace ExaminationSystem
 
 			if (sender is Border border2 && border2.DataContext is QuestionWrapper questionWrapper)
 			{
-				_wrappedQuestions[currentQuestionIndex].IsFoucsed = false;
-				currentQuestionIndex = questionWrapper.Question.Id-1;
-				_wrappedQuestions[currentQuestionIndex].IsFoucsed = true;
+				_examViewModel.WrappedQuestions[currentQuestionIndex].IsFoucsed = false;
+				currentQuestionIndex = questionWrapper.Question.Id - 1;
+				_examViewModel.WrappedQuestions[currentQuestionIndex].IsFoucsed = true;
 				SelectNavQuestion(questionWrapper.Question.Id - 1);
 
 			}
@@ -234,9 +266,9 @@ namespace ExaminationSystem
 
 		private void Grid_Loaded(object sender, RoutedEventArgs e)
 		{
-			_wrappedQuestions[currentQuestionIndex].IsFoucsed = true;						
+			_examViewModel.WrappedQuestions[currentQuestionIndex].IsFoucsed = true;
 			SelectNavQuestion(0);
-			ScrollToQuestion(0);		
+			ScrollToQuestion(0);
 		}
 
 		private void FlagImage_MouseDown(object sender, MouseButtonEventArgs e)
@@ -244,6 +276,19 @@ namespace ExaminationSystem
 			if (sender is Image flagImage && flagImage.DataContext is QuestionWrapper wrapper)
 			{
 				wrapper.IsFlaged = !wrapper.IsFlaged;
+			}
+		}
+
+		private void SubmitExam(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show($"Your Score Is : {myExam.CorrectExam().ToString()}");
+		}
+
+		private void ShowCorrectAnswer(object sender, RoutedEventArgs e)
+		{
+			if (sender is Button showCorrectAnswer && showCorrectAnswer.DataContext is QuestionWrapper wrapper)
+			{
+				wrapper.IsAnswering = !wrapper.IsAnswering;
 			}
 		}
 	}

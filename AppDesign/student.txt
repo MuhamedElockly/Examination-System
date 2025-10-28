@@ -1,1 +1,110 @@
-Student total score is : 0%
+1- Choose One !: What is abstraction?
+ 	A- hide complex implementation
+	B- enable code reusablity
+	C- bundl code into dingle unit
+	D- make code use for more than function
+	
+Student answer is : C
+Correct answer is : A
+
+-------------------------------------------
+
+2- Choose One !: What is abstraction?
+ 	A- hide complex implementation
+	B- enable code reusablity
+	C- bundl code into dingle unit
+	
+Student answer is : C
+Correct answer is : A
+
+-------------------------------------------
+
+4- Choose All Correct Answers separated by comma!: What is abstraction?
+ 	A- hide complex implementation
+	B- enable code reusablity
+	C- bundl code into dingle unit
+	D- make code use for more than function
+	
+Student answer is : A,B,C
+Correct answer is : A,B,
+
+-------------------------------------------
+
+6- Choose One !: What is abstraction?
+ 	A- hide complex implementation
+	B- enable code reusablity
+	C- bundl code into dingle unit
+	D- make code use for more than function
+	
+Student answer is : A
+Correct answer is : A
+
+-------------------------------------------
+
+7- Choose One !: What is abstraction?
+ 	A- hide complex implementation
+	B- enable code reusablity
+	C- bundl code into dingle unit
+	D- make code use for more than function
+	
+Student answer is : B
+Correct answer is : A
+
+-------------------------------------------
+
+8- Choose One !: What is abstraction?
+ 	A- hide complex implementation
+	B- enable code reusablity
+	C- bundl code into dingle unit
+	D- make code use for more than function
+	
+Student answer is : B
+Correct answer is : A
+
+-------------------------------------------
+
+9- Choose One !: What is abstraction?
+ 	A- hide complex implementation
+	B- enable code reusablity
+	C- bundl code into dingle unit
+	D- make code use for more than function
+	
+Student answer is : A
+Correct answer is : A
+
+-------------------------------------------
+
+10- Choose One !: What is abstraction?
+ 	A- hide complex implementation
+	B- enable code reusablity
+	C- bundl code into dingle unit
+	D- make code use for more than function
+	
+Student answer is : C
+Correct answer is : A
+
+-------------------------------------------
+
+11- Choose One !: What is abstraction?
+ 	A- hide complex implementation
+	B- enable code reusablity
+	C- bundl code into dingle unit
+	D- make code use for more than function
+	
+Student answer is : D
+Correct answer is : A
+
+-------------------------------------------
+
+12- Choose One !: What is abstraction?
+ 	A- hide complex implementation
+	B- enable code reusablity
+	C- bundl code into dingle unit
+	D- make code use for more than function
+	
+Student answer is : B
+Correct answer is : A
+
+-------------------------------------------
+
+Student total score is : 16.666666666666664%
